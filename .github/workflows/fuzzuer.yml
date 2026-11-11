@@ -1,0 +1,179 @@
+# Fuzz THIS edk2 tree with FuzzUEr, and file what it finds as issues on this repository.
+#
+# This is the worked example: one `uses:` line is the whole integration. The action builds
+# an LLVM-instrumented OVMF out of this checkout, generates a harness per protocol from the
+# tree's own headers, fuzzes each one under QEMU with an address sanitizer in the firmware,
+# and opens one issue per candidate with the crashing input and the log attached.
+#
+# Findings are CANDIDATES, not confirmed vulnerabilities. Read bugs.md in the run artifact
+# and the code snippet in the issue body before acting on any of them.
+#
+# WHAT THIS COSTS, because it is not a badge you add on a whim:
+#   * a dedicated SELF-HOSTED Linux x64 runner registered to THIS repository. A runner
+#     registered to another repository will not pick this up, and the symptom is a job that
+#     sits in Queued with nothing explaining why.
+#   * ~100 GB free disk, and a first run that spends hours building LLVM-instrumented OVMF
+#     and a QEMU that libafl compiles from source. Later runs reuse the images.
+#   * one platform: OvmfPkg/OvmfPkgX64.dsc, -a X64 -t CLANGSAN. No other DSC, architecture
+#     or toolchain is built.
+name: FuzzUEr
+
+on:
+  # Weekly, so a tree that drifts is re-fuzzed without anyone remembering to ask. GitHub
+  # honours `schedule` only from the DEFAULT branch, which is why this file has to land on
+  # master before the cron ever fires.
+  schedule:
+    - cron: '0 5 * * 0'
+
+  # A branch push, so this workflow is REACHABLE without an API token. `schedule` fires
+  # only from the default branch and `workflow_dispatch` needs the API, so a workflow with
+  # neither can sit broken for a week with nothing a developer could push to find out.
+  # A push qualifies the tree -- port, build, instrument, detect -- in minutes and stops
+  # before the fuzzing budget, so it answers "is the pipeline healthy on this tree?"
+  # without spending hours or touching the issue tracker.
+  #
+  # No other workflow here matches this prefix: codeql.yml and upl-build.yml are the only
+  # push-triggered ones and both are `master`.
+  push:
+    branches: ['fuzzuer-**']
+
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: 'Space-separated protocols, or empty for the default set'
+        required: false
+        default: ''
+      budget:
+        description: 'Seconds of fuzzing per target'
+        required: false
+        default: '600'
+      qualify_only:
+        description: 'Build and check without spending the fuzzing budget'
+        required: false
+        default: 'false'
+
+# Both are needed and the action says so when they are missing. `issues: write` files the
+# findings; `contents: write` pushes the fuzzuer-evidence branch that carries each finding's
+# harness, crashing input and log. A read-only token fuzzes perfectly well and then loses
+# every finding at the last step.
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  fuzz:
+    runs-on: [self-hosted, linux, x64]
+    # A full run is hours. The default budget below is deliberately modest so a weekly run
+    # finishes overnight rather than running into the next day.
+    timeout-minutes: 720
+    steps:
+      # Full depth on purpose: the pipeline resolves refs out of git history, so a
+      # --depth=1 clone cannot name a tag or walk to a commit.
+      - name: Check out this edk2
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Out of the WORKSPACE, and keyed by the run. actions/checkout@v4 runs
+      # `git clean -ffdx` and -x removes ignored files too, so anything written inside the
+      # checkout is deleted by the next job to land on this runner -- which is how one
+      # completed sweep upstream lost its entire output 42 seconds after finishing. Also
+      # not RUNNER_TEMP, which the runner wipes at job end, taking the log and the
+      # reproducers with it.
+      - name: Where to keep the results
+        id: where
+        run: echo "out=$HOME/fuzzuer-tianoshield/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+
+      # An input's default applies to workflow_dispatch and to NOTHING else, so on a
+      # schedule or a push every github.event.inputs.* arrives as the empty string --
+      # and "--budget ''" is rejected before the first stage runs. The mode is decided
+      # here, from the event, and passed through the environment rather than interpolated
+      # into the script, because an input is whatever the person typed.
+      - name: What this run is for
+        id: plan
+        shell: bash
+        env:
+          IN_QUALIFY: ${{ github.event.inputs.qualify_only }}
+          IN_BUDGET: ${{ github.event.inputs.budget }}
+        run: |
+          set -uo pipefail
+          if [ "${GITHUB_EVENT_NAME:-}" = 'push' ]; then
+            echo 'qualify=true' >> "$GITHUB_OUTPUT"
+            # A qualify-only run spends no budget and so produces no finding to file.
+            # Saying so explicitly keeps a health check from ever touching the tracker.
+            echo 'issues=false' >> "$GITHUB_OUTPUT"
+          else
+            echo "qualify=${IN_QUALIFY:-false}" >> "$GITHUB_OUTPUT"
+            echo 'issues=true' >> "$GITHUB_OUTPUT"
+          fi
+          echo "budget=${IN_BUDGET:-600}" >> "$GITHUB_OUTPUT"
+
+      - name: Fuzz it
+        id: fuzz
+        uses: BreakingBoot/FuzzUEr@v1
+        with:
+          out: ${{ steps.where.outputs.out }}
+          # This checkout, and no `ref:` -- so the action fuzzes whatever commit this
+          # repository is on rather than an upstream release. That is the difference
+          # between "does upstream have bugs" and "does MY tree have bugs".
+          source: .
+          targets: ${{ github.event.inputs.targets || 'EfiAcpiTable EfiHiiFont EfiSmbios EdkiiFormBrowserEx EfiHiiString EfiDevicePathToText' }}
+          budget: ${{ steps.plan.outputs.budget }}
+          qualify-only: ${{ steps.plan.outputs.qualify }}
+          # One issue per candidate, keyed on module + bug class + source file, so a later
+          # run that finds the same site again adds nothing. The key deliberately leaves
+          # the build offset out, because an offset moves with every build and would file
+          # a fresh issue every week for a defect already open.
+          open-issues: ${{ steps.plan.outputs.issues }}
+          # A finding is not a build failure. The issues and the artifact are the report;
+          # turning the job red as well only trains people to ignore it.
+          fail-on-findings: false
+
+      - name: What the run concluded
+        if: always()
+        shell: bash
+        env:
+          RESULTS: ${{ steps.fuzz.outputs.results }}
+          STAGES: ${{ steps.fuzz.outputs.stages }}
+          CANDIDATES: ${{ steps.fuzz.outputs.candidates }}
+          FILED: ${{ steps.fuzz.outputs.issues-filed }}
+          TRACKED: ${{ steps.fuzz.outputs.issues-tracked }}
+          DEGRADED: ${{ steps.fuzz.outputs.degraded }}
+        run: |
+          set -uo pipefail
+          {
+            echo "### FuzzUEr on \`${GITHUB_SHA:0:12}\`"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| stages passed | ${STAGES:-unknown} |"
+            echo "| candidates | ${CANDIDATES:-unknown} |"
+            echo "| issues filed | ${FILED:-0} |"
+            echo "| already tracked | ${TRACKED:-0} |"
+            # "true" when a stage did its job but not for every target -- a few campaigns
+            # of many that lost their boot, say. The job stays green for it on purpose,
+            # and the warnings in the log name the stage, so this row is what tells a
+            # reader a green run still has something worth looking at in it.
+            echo "| degraded | ${DEGRADED:-no} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ -f "${RESULTS:-}/bugs.md" ]; then
+            { echo; cat "${RESULTS}/bugs.md"; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Keep the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzzuer-${{ github.run_id }}
+          # error, not warn or ignore: the globs below point outside the workspace, and a
+          # path that silently matches nothing leaves a GREEN run holding an empty
+          # artifact -- which reads as "nothing to report" rather than "nothing was kept".
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            ${{ steps.where.outputs.out }}/pipeline.log
+            ${{ steps.where.outputs.out }}/bugs.md
+            ${{ steps.where.outputs.out }}/bugs.json
+            ${{ steps.where.outputs.out }}/run.json
+            ${{ steps.where.outputs.out }}/bench_cases.log
+            ${{ steps.where.outputs.out }}/reproducers
