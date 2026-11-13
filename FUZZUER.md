@@ -23,6 +23,7 @@ that does the work is one `uses:` line.
 | how | what happens |
 |---|---|
 | push a branch named `fuzzuer-anything` | qualifies the tree — port, build, instrument, detect — in minutes, spends no fuzzing budget and files no issues |
+| push a branch named `fuzzuer-full-anything` | the whole pipeline on every target, findings filed as issues. Hours. This is the weekly run, on demand and without an API token |
 | Actions → FuzzUEr → Run workflow | a full run; `targets`, `budget` and `qualify_only` are inputs |
 | Sundays 05:00 UTC | a full run on `master` |
 

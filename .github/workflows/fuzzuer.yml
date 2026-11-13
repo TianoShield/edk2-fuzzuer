@@ -15,7 +15,11 @@
 #   * ~100 GB free disk, and a first run that spends hours building LLVM-instrumented OVMF
 #     and a QEMU that libafl compiles from source. Later runs reuse the images.
 #   * one platform: OvmfPkg/OvmfPkgX64.dsc, -a X64 -t CLANGSAN. No other DSC, architecture
-#     or toolchain is built.
+#     or toolchain is built. A defect in a package this platform does not include -- ArmPkg,
+#     say -- is not reachable from here no matter how long it runs.
+#   * hours per weekly run, because the target list below is blank and so resolves to every
+#     installed protocol plus the SMI handlers. A `fuzzuer-` branch push qualifies the tree
+#     in minutes instead; see the push trigger.
 name: FuzzUEr
 
 on:
@@ -31,6 +35,15 @@ on:
   # A push qualifies the tree -- port, build, instrument, detect -- in minutes and stops
   # before the fuzzing budget, so it answers "is the pipeline healthy on this tree?"
   # without spending hours or touching the issue tracker.
+  #
+  # Two prefixes, because a health check and a real sweep want opposite defaults and
+  # `workflow_dispatch` -- the only other way to choose between them -- needs an API
+  # token, which a developer running this from a terminal does not have:
+  #   fuzzuer-**       qualifies the tree and stops before the budget. Minutes, and it
+  #                    never touches the issue tracker.
+  #   fuzzuer-full-**  the whole pipeline, every target, findings filed as issues. Hours.
+  # `fuzzuer-full-x` matches both patterns and GitHub runs the workflow once, so the
+  # choice is made below by branch name rather than by which pattern matched.
   #
   # No other workflow here matches this prefix: codeql.yml and upl-build.yml are the only
   # push-triggered ones and both are `master`.
@@ -97,7 +110,8 @@ jobs:
           IN_BUDGET: ${{ github.event.inputs.budget }}
         run: |
           set -uo pipefail
-          if [ "${GITHUB_EVENT_NAME:-}" = 'push' ]; then
+          if [ "${GITHUB_EVENT_NAME:-}" = 'push' ] \
+             && [ "${GITHUB_REF_NAME#fuzzuer-full-}" = "${GITHUB_REF_NAME}" ]; then
             echo 'qualify=true' >> "$GITHUB_OUTPUT"
             # A qualify-only run spends no budget and so produces no finding to file.
             # Saying so explicitly keeps a health check from ever touching the tracker.
@@ -117,14 +131,40 @@ jobs:
           # repository is on rather than an upstream release. That is the difference
           # between "does upstream have bugs" and "does MY tree have bugs".
           source: .
-          targets: ${{ github.event.inputs.targets || 'EfiAcpiTable EfiHiiFont EfiSmbios EdkiiFormBrowserEx EfiHiiString EfiDevicePathToText' }}
+          # Blank, which is every SMI handler the discover stage finds plus every
+          # protocol a census of the built firmware says this image actually installs --
+          # on an OVMF X64 build that is roughly 130 campaigns rather than the six named
+          # here before. Six was the right list while `--smi` was forwarded to every
+          # campaign in a batch, because the generator branches on that flag and so every
+          # protocol campaign rebuilt the SMI harness instead of its own; the campaigns
+          # are per-target from FuzzUEr's "the SMI mode belongs to the SMI target" change
+          # on, and a named list now only narrows the surface. A dispatch can still pass
+          # a list to re-check one target quickly.
+          targets: ${{ github.event.inputs.targets }}
           budget: ${{ steps.plan.outputs.budget }}
           qualify-only: ${{ steps.plan.outputs.qualify }}
+          # The SMI handlers as well as the protocols. `smi` implies `smm`, which builds
+          # the image with SMM_REQUIRE=TRUE: without it OVMF has no SMM core, every image
+          # reports zero SMM modules, and the handler campaign has nothing to send to.
+          smi: true
+          # The handlers worth reaching latch on EndOfDxe and refuse a caller afterwards,
+          # and the default `application` timing is a boot option BDS launches after that
+          # event -- so an application-timed harness meets a shut door at the targets that
+          # matter. `dxe` builds the harness into the DXE firmware volume with a depex so
+          # it runs while the latch is still open.
+          harness-timing: dxe
           # One issue per candidate, keyed on module + bug class + source file, so a later
           # run that finds the same site again adds nothing. The key deliberately leaves
           # the build offset out, because an offset moves with every build and would file
           # a fresh issue every week for a defect already open.
           open-issues: ${{ steps.plan.outputs.issues }}
+          # Above the default 50, because that default was set for a handful of named
+          # targets. A sweep of every installed protocol attributes several hundred
+          # candidates, and the cap does not fail or retry -- it files the worst by
+          # severity, warns in the log, and leaves the rest in bugs.md inside the
+          # artifact, which from the tracker is indistinguishable from having found
+          # nothing more.
+          max-issues: 150
           # A finding is not a build failure. The issues and the artifact are the report;
           # turning the job red as well only trains people to ignore it.
           fail-on-findings: false
