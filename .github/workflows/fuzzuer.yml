@@ -124,12 +124,14 @@ jobs:
 
       - name: Fuzz it
         id: fuzz
-        # A commit, not a moving tag. `@v1` is what a worked example would normally
-        # show, and it is what to use once this repository has a run it trusts -- but
-        # the first run on a tree has to be able to say WHICH FuzzUEr produced a
-        # finding, and a tag that moves under you cannot answer that. This commit is
-        # the one whose Action smoke and check battery are green.
-        uses: BreakingBoot/FuzzUEr@7f4879735b58afdafc5d42fb243a4f9428edf0d9
+        # An immutable release tag, not `@v1`. A worked example normally shows `@v1`,
+        # but `v1` moves, and the first thing anyone asks about a finding is which
+        # FuzzUEr produced it -- a tag that moves under you cannot answer that, and
+        # this repository had a run pinned to a month-old `v1` for exactly that reason.
+        # v1.1.14 is the release whose check battery (59 scripts, ~1900 assertions) and
+        # Action smoke are both green, and whose firness submodule commit is on its own
+        # remote so a recursive clone of this pin resolves.
+        uses: BreakingBoot/FuzzUEr@v1.1.14
         with:
           out: ${{ steps.where.outputs.out }}
           # This checkout, and no `ref:` -- so the action fuzzes whatever commit this
