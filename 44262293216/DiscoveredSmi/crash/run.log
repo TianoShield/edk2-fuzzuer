@@ -1,0 +1,90 @@
+File 'Asan.h' already exists in 'MdeModulePkg/Include/Library', skipping copy.
+File 'AsanInfo.h' already exists in 'MdeModulePkg/Include/Guid', skipping copy.
+File 'AsanLib' already exists in 'MdeModulePkg/Library/', skipping copy.
+File 'AsanLibNull' already exists in 'MdeModulePkg/Library/', skipping copy.
+File 'AsanRuntimeLib' already exists in 'MdeModulePkg/Library/', skipping copy.
+File 'AsanMemoryLib' already exists in 'MdePkg/Library/', skipping copy.
+File 'AsanMemoryLibRepStr' already exists in 'MdePkg/Library/', skipping copy.
+Patch has already been applied. Skipping patching.
+++++ Instrumented Firmware ++++
+++++ Reusing the compilation database (1369 entries) ++++
+  static analysis exited -11 (killed by signal 11) -- retrying once
+  it printed nothing at all before dying
+++++ Ran Static Analysis Tool ++++
+Removing TcgPhysicalPresenceLib because it depends on UefiDriverEntryPoint which is not in the library map
+Removing Tcg2PhysicalPresenceLib because it depends on UefiDriverEntryPoint which is not in the library map
+Removing CustomizedDisplayLib because it depends on UefiDriverEntryPoint which is not in the library map
+Removing PciHostBridgeLib because it depends on MapMmioLib which is not in the library map
+Removing ArmFfaLib because it depends on MmServicesTableLib which is not in the library map
+Removing FspMeasurementLib because it depends on PeiServicesLib which is not in the library map
+Removing FspWrapperPlatformMultiPhaseLib because it depends on PeiServicesLib which is not in the library map
+Removing FspWrapperMultiPhaseProcessLib because it depends on PeiServicesLib which is not in the library map
+Removing SmmRelocationLib because it depends on PeiServicesLib which is not in the library map
+Removing MmSaveStateLib because it depends on MmServicesTableLib which is not in the library map
+253 libraries found
+INFO: smi handler SmmFaultTolerantWriteHandler -- carrying SMM_FTW_COMMUNICATE_FUNCTION_HEADER in the harness; /workspace/tmp/edk2/MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteSmmCommon.h is private to its driver
+SMI coverage: 6 of 25 registered handler(s) harnessed on the comm buffer, addressed by GUID
+  CAVEAT: SmmFaultTolerantWriteHandler is harnessed but gated on mEndOfDxe -- FaultTolerantWriteSmm.c sets it outside the handler (initially FALSE). MmEndOfDxeCallback sets it from the gEfiMmEndOfDxeProtocolGuid notify, so the guarded body is reachable only before that event -- a DXE driver could, a UEFI application cannot. 4 call(s) run before the gate and are reached whatever it holds
+  not harnessed: BlSwSmiHandler -- reached by the software SMI port channel, not by a comm buffer, but its registration asks the dispatcher for the next free command byte (-1) instead of naming one, so no static pass can say which byte addresses it and the DiscoveredSwSmi target leaves it out rather than guessing
+  not harnessed: CpuHotplugMmi -- a root handler: it runs on every MMI this campaign raises, so it is exercised whatever the target, but it has no address of its own and no buffer it reads, so there is nothing for a target to aim at
+  not harnessed: MemoryClearCallback -- reached by the software SMI port channel, not by a comm buffer, but its registration asks the dispatcher for the next free command byte (-1) instead of naming one, so no static pass can say which byte addresses it and the DiscoveredSwSmi target leaves it out rather than guessing
+  not harnessed: PeriodicSmiDispatchFunction -- registered through a dispatch protocol, not a comm-buffer GUID, so SmmCommunication cannot reach it
+  not harnessed: PhysicalPresenceCallback -- reached by the software SMI port channel, not by a comm buffer, but its registration asks the dispatcher for the next free command byte (-1) instead of naming one, so no static pass can say which byte addresses it and the DiscoveredSwSmi target leaves it out rather than guessing
+  not harnessed: PiSmmCommunicationHandler -- reached by the software SMI port channel, not by a comm buffer, but its registration asks the dispatcher for the next free command byte (-1) instead of naming one, so no static pass can say which byte addresses it and the DiscoveredSwSmi target leaves it out rather than guessing
+  not harnessed: SanBenchSmmHandler -- its comm buffer is never cast to any type
+  not harnessed: SmmDriverDispatchHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmEndOfDxeHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmEndOfS3ResumeHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmExitBootServicesHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmLegacyBootHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmLockBoxS3EntryCallBack -- its channel is an S-state transition; this campaign drives the comm buffer, addressed by GUID
+  not harnessed: SmmReadyToBootHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmReadyToLockHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: SmmS3EntryCallBack -- its channel is an S-state transition; this campaign drives the comm buffer, addressed by GUID
+  not harnessed: SmmS3SmmInitDoneHandler -- GUID-dispatched, but the type of the structure its CommBuffer carries was not resolved, so there are no fields to fill
+  not harnessed: TpmNvsCommunciate -- it casts its comm buffer to TPM_NVS_MM_COMM_BUFFER, which no module in this build declares -- the analyser records only types it parsed, so a driver absent from the platform DSC takes its payload type with it
+  not harnessed: VarCheckHiiLibReceiveHiiBinHandler -- its comm buffer is never cast to any type
+SMI cross-module: 0 peer-protocol crossing(s) carrying caller-controlled data, from 15 handler body(ies)
+/workspace/firness_output/GeneratedHarnesses/Harness_11_18_2026_08_49
+INFO: including Protocol/VariablePolicy.h -- declares a type the harness includes but cannot see
+INFO: not linking 20 librar(ies) the harness never calls: DpcLib, DxeServicesLib, DxeServicesTableLib, HobPrintLib, HttpIoLib, IoLib, PciCapPciIoLib, PciCf8Lib, PciExpressLib, PciLib, PeCoffGetEntryPointLib, ReportStatusCodeLib, SafeIntLib, SerialPortLib, SortLib, SynchronizationLib, TimerLib, UefiBootManagerLib, UefiHiiServicesLib, VariablePolicyHelperLib
+SMI harness timing: dxe -- a DXE_DRIVER in the firmware volume, so a handler that latches on EndOfDxe is still open. Depex waits on 1 protocol(s).
+
+/usr/local/lib/python3.10/dist-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+
+++++ Generated Harness ++++
+++++ harness placed in the DXE FV: 1 component entr(ies), 1 FDF entr(ies) added (0 and 0 means a previous campaign in this tree already placed it) ++++
+++++ restaged OVMF_CODE.fd -> /workspace/qemu_fw/OVMF_CODE.fd (7847936 bytes) ++++
+++++ restaged OVMF_VARS.fd -> /workspace/qemu_fw/OVMF_VARS.fd (540672 bytes) ++++
+++++ Compiled Harness into the DXE FV ++++
+Wrote 36 seeds for 6 target(s) into /workspace/firness_output/qemu/corpus (2050 bytes and 26 bytes)
+  seeds dispatch 6/6 target(s) on their first step, 4 step(s) each
+++++ Booting to the harness (up to 2607s), then fuzzing under LibAFL-QEMU for 600s ++++
+++++ Harness reached after 533s of boot; fuzzing for 600s ++++
+Fuzzed 43977 iteration(s), 3632 edge(s), 0 solution(s)
+    re-attributed 1 site(s) from their own ip
+++++ Collected Unique Crashes ++++
+  boot baseline: 0 report(s) at 0 site(s) -- not fuzzing findings
+  fuzzing:       5047 report(s) at 8 site(s)
+    leaving 8 site(s) attributable to an input
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| Phase   | AtBoot   | Module            | Function          | File   |      Line | Asan Msg           | ErrorType   | Message                                                                                                                                                                                                                                                                                       |   Count |
++=========+==========+===================+===================+========+===========+====================+=============+===============================================================================================================================================================================================================================================================================================+=========+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529194 | fwsan-double-fetch | asan        | address 0x000000001BF38031, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FF96A, untrusted_field offset=0x0000000000000031 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529227 | fwsan-double-fetch | asan        | address 0x000000001BF38032, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FF98B, untrusted_field offset=0x0000000000000032 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529260 | fwsan-double-fetch | asan        | address 0x000000001BF38033, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FF9AC, untrusted_field offset=0x0000000000000033 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529301 | fwsan-double-fetch | asan        | address 0x000000001BF38034, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FF9D5, untrusted_field offset=0x0000000000000034 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529337 | fwsan-double-fetch | asan        | address 0x000000001BF38035, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FF9F9, untrusted_field offset=0x0000000000000035 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529364 | fwsan-double-fetch | asan        | address 0x000000001BF38036, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FFA14, untrusted_field offset=0x0000000000000036 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | CpuHotplugSmm.efi |                   | fwsan  | 529529408 | fwsan-double-fetch | asan        | address 0x000000001BF38037, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001F8FFA40, untrusted_field offset=0x0000000000000037 base=0x000000001BF38000 extent=0x0000000000000131 first_ip=0x000000001F8FF949 first_addr=0x000000001BF38030 first_bytes=0x0000000000000001 |     153 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| fuzz    |          | SmmLockBox.efi    | SmmLockBoxHandler | fwsan  | 535950984 | fwsan-double-fetch | asan        | address 0x000000001BF38018, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001FF1F688, untrusted_field offset=0x0000000000000018 base=0x000000001BF38000 extent=0x0000000000000028 first_ip=0x000000001FF1F66E first_addr=0x000000001BF38018 first_bytes=0x0000000000000004 |    3976 |
++---------+----------+-------------------+-------------------+--------+-----------+--------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+++++ Generated Report ++++

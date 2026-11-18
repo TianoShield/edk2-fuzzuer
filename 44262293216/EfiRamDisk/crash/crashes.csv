@@ -1,0 +1,17 @@
+Phase,AtBoot,Module,Function,File,Line,Asan Msg,ErrorType,Message,Count
+fuzz,,DxeCore.efi,CoreInsertEventTimer,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Event/Timer.c,54,__asan_load0x08,asan,ip 0x000000001B9A8ED3,1
+fuzz,,DxeCore.efi,InternalBaseLibIsListValid,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,76,__asan_load0x08,asan,ip 0x000000001B9B14D7,1
+fuzz,,DxeCore.efi,RemoveEntryList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,596,__asan_load0x08,asan,ip 0x000000001B9B1DB3,1
+fuzz,,DxeCore.efi,RemoveEntryList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,597,__asan_load0x08,asan,ip 0x000000001B9B1DF0,1
+fuzz,,DxeCore.efi,CoreInsertEventTimer,asan-outline-instrumentation,463113939,unknown-crash,asan,"address 0x00000000184CA0A8, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001B9A8ED3",1
+fuzz,,DxeCore.efi,InternalBaseLibIsListValid,asan-outline-instrumentation,463148247,heap-use-after-free,asan,"address 0x00000000180A1E98, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001B9B14D7",1
+fuzz,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,463150515,heap-use-after-free,asan,"address 0x00000000180A1E98, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001B9B1DB3",1
+fuzz,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,463150576,heap-use-after-free,asan,"address 0x00000000180A1E98, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001B9B1DF0",1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3393,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x0000000000000014,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3406,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x0000000000000014,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3419,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000000C2,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3432,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000000C2,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3445,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3458,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3471,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3484,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1

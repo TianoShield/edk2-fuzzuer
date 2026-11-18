@@ -1,0 +1,128 @@
+Phase,AtBoot,Module,Function,File,Line,Asan Msg,ErrorType,Message,Count
+fuzz,,EnglishDxe.efi,EngStriColl,fwsan,403628089,fwsan-double-fetch,asan,"address 0x0000000017BB3328, size 0x0000000000000002, is_write 0x0000000000000000, ip 0x00000000180EE039, untrusted_field offset=0x0000000000000000 base=0x0000000017BB3328 extent=0x0000000000000040 first_ip=0x00000000180EE039 first_addr=0x0000000017BB3328 first_bytes=0x0000000000000002",92
+fuzz,,EnglishDxe.efi,EngStriColl,fwsan,403628340,fwsan-double-fetch,asan,"address 0x0000000017BB3328, size 0x0000000000000002, is_write 0x0000000000000000, ip 0x00000000180EE134, untrusted_field offset=0x0000000000000000 base=0x0000000017BB3328 extent=0x0000000000000040 first_ip=0x00000000180EE039 first_addr=0x0000000017BB3328 first_bytes=0x0000000000000002",89
+fuzz,,EnglishDxe.efi,EngStriColl,fwsan,403628685,fwsan-double-fetch,asan,"address 0x0000000017BB3328, size 0x0000000000000002, is_write 0x0000000000000000, ip 0x00000000180EE28D, untrusted_field offset=0x0000000000000000 base=0x0000000017BB3328 extent=0x0000000000000040 first_ip=0x00000000180EE039 first_addr=0x0000000017BB3328 first_bytes=0x0000000000000002",90
+fuzz,,EnglishDxe.efi,EngStriColl,fwsan,403628746,fwsan-double-fetch,asan,"address 0x0000000017BB3328, size 0x0000000000000002, is_write 0x0000000000000000, ip 0x00000000180EE2CA, untrusted_field offset=0x0000000000000000 base=0x0000000017BB3328 extent=0x0000000000000040 first_ip=0x00000000180EE039 first_addr=0x0000000017BB3328 first_bytes=0x0000000000000002",89
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,0,__asan_load0x08,asan,ip 0x000000001BB1B885,158
+boot,,DxeCore.efi,RemoveMemoryMapEntry,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,121,__asan_store0x08,asan,ip 0x000000001BB18624,17
+boot,,DxeCore.efi,RemoveMemoryMapEntry,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,123,__asan_load0x01,asan,ip 0x000000001BB18631,17
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,227,__asan_load0x08,asan,ip 0x000000001BB1881E,106
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,228,__asan_load0x08,asan,ip 0x000000001BB188AB,53
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,230,__asan_load0x04,asan,ip 0x000000001BB188C1,53
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,238,__asan_load0x08,asan,ip 0x000000001BB18901,26
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,239,__asan_load0x08,asan,ip 0x000000001BB189E8,8
+boot,,DxeCore.efi,CoreAddRange,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,242,__asan_load0x08,asan,ip 0x000000001BB18A05,8
+boot,,DxeCore.efi,AllocateMemoryMapEntry,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,316,__asan_load0x08,asan,ip 0x000000001BB18EF9,36
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,376,__asan_store0x01,asan,ip 0x000000001BB19230,18
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,382,__asan_load0x08,asan,ip 0x000000001BB19285,34
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,383,__asan_load0x08,asan,ip 0x000000001BB19332,871
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,679,__asan_load0x08,asan,ip 0x000000001BB19E93,56
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,681,__asan_load0x08,asan,ip 0x000000001BB19F20,56
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,729,__asan_load0x04,asan,ip 0x000000001BB1A09B,18
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,741,__asan_load0x04,asan,ip 0x000000001BB1A0B5,18
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,756,__asan_load0x08,asan,ip 0x000000001BB1A11D,18
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,760,__asan_store0x08,asan,ip 0x000000001BB1A12E,10
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,761,__asan_load0x08,asan,ip 0x000000001BB1A13B,8
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,765,__asan_store0x08,asan,ip 0x000000001BB1A14F,8
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,800,__asan_load0x08,asan,ip 0x000000001BB1A16B,18
+boot,,DxeCore.efi,CoreConvertPagesEx,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,810,__asan_load0x08,asan,ip 0x000000001BB1A195,36
+boot,,DxeCore.efi,CoreFindFreePagesI,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,975,__asan_load0x08,asan,ip 0x000000001BB1A86C,56
+boot,,DxeCore.efi,CoreFindFreePagesI,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,980,__asan_load0x04,asan,ip 0x000000001BB1A8F4,28
+boot,,DxeCore.efi,CoreFindFreePagesI,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,987,__asan_load0x08,asan,ip 0x000000001BB1A90D,19
+boot,,DxeCore.efi,CoreFindFreePagesI,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,991,__asan_load0x08,asan,ip 0x000000001BB1A926,19
+boot,,DxeCore.efi,CoreFindFreePagesI,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,997,__asan_load0x08,asan,ip 0x000000001BB1A93C,19
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1962,__asan_load0x08,asan,ip 0x000000001BB1B9E1,28
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1963,__asan_load0x08,asan,ip 0x000000001BB1BA6E,14
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1964,__asan_load0x08,asan,ip 0x000000001BB1BAA2,14
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1966,__asan_load0x08,asan,ip 0x000000001BB1BADF,56
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1967,__asan_load0x08,asan,ip 0x000000001BB1BB61,14
+boot,,DxeCore.efi,CoreGetMemoryMap,/workspace/tmp/edk2/MdeModulePkg/Core/Dxe/Mem/Page.c,1968,__asan_load0x04,asan,ip 0x000000001BB1BB8D,14
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3393,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x0000000000000014,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3406,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x0000000000000014,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3419,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000000C2,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3432,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000000C2,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3445,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3458,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3471,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,HiiDatabase.efi,,/workspace/tmp/edk2/MdeModulePkg/Universal/HiiDatabaseDxe/Database.c,3484,__ubsan_handle_pointer_overflow,NullPointerArithmetic,offset applied to a null pointer base 0x0000000000000000 result 0x00000000000006ED,1
+boot,,DxeCore.efi,AsanInternalMemCopyMem,/workspace/tmp/edk2/MdePkg/Library/AsanMemoryLibRepStr/CopyMemWrapper.c,72,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000058, is_write 0x0000000000000001, ip 0x000000001BB38196",18
+boot,,DxeCore.efi,InternalBaseLibIsListValid,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,75,__asan_load0x08,asan,ip 0x000000001BB3349E,44
+boot,,DxeCore.efi,InternalBaseLibIsListValid,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,76,__asan_load0x08,asan,ip 0x000000001BB334D7,44
+boot,,DxeCore.efi,InsertTailList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,269,__asan_store0x08,asan,ip 0x000000001BB338FD,35
+boot,,DxeCore.efi,InsertTailList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,270,__asan_store0x08,asan,ip 0x000000001BB33920,44
+boot,,DxeCore.efi,InsertTailList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,271,__asan_store0x08,asan,ip 0x000000001BB33931,26
+boot,,DxeCore.efi,InsertTailList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,272,__asan_store0x08,asan,ip 0x000000001BB33941,9
+boot,,DxeCore.efi,IsListEmpty,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,412,__asan_load0x08,asan,ip 0x000000001BB33B22,35
+boot,,DxeCore.efi,RemoveEntryList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,596,__asan_load0x08,asan,ip 0x000000001BB33DB3,97
+boot,,DxeCore.efi,RemoveEntryList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,597,__asan_load0x08,asan,ip 0x000000001BB33DE5,78
+boot,,DxeCore.efi,RemoveEntryList,/workspace/tmp/edk2/MdePkg/Library/BaseLib/LinkedList.c,598,__asan_load0x08,asan,ip 0x000000001BB33E0C,35
+boot,,DxeCore.efi,RemoveMemoryMapEntry,asan-outline-instrumentation,464619044,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB18624",1
+boot,,DxeCore.efi,RemoveMemoryMapEntry,asan-outline-instrumentation,464619057,heap-use-after-free,asan,"address 0x00000000180EB070, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001BB18631",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619550,heap-use-after-free,asan,"address 0x00000000180EB000, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1881E",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619597,heap-use-after-free,asan,"address 0x00000000180EB000, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1884D",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619691,heap-use-after-free,asan,"address 0x00000000180EB008, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB188AB",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619713,heap-use-after-free,asan,"address 0x00000000180EB01C, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001BB188C1",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619741,heap-use-after-free,asan,"address 0x00000000180EB038, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB188DD",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619777,heap-use-after-free,asan,"address 0x00000000180EB028, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB18901",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464619813,heap-use-after-free,asan,"address 0x00000000180EB020, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB18925",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464620008,heap-use-after-free,asan,"address 0x00000000180EB0D0, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB189E8",1
+boot,,DxeCore.efi,CoreAddRange,asan-outline-instrumentation,464620037,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB18A05",1
+boot,,DxeCore.efi,AllocateMemoryMapEntry,asan-outline-instrumentation,464621305,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB18EF9",1
+boot,,DxeCore.efi,AllocateMemoryMapEntry,asan-outline-instrumentation,464621352,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB18F28",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622128,heap-use-after-free,asan,"address 0x00000000180EB070, size 0x0000000000000001, is_write 0x0000000000000001, ip 0x000000001BB19230",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622157,heap-use-after-free,asan,"address 0x00000000180EB0B8, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1924D",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622213,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19285",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622258,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB192B2",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622349,heap-use-after-free,asan,"address 0x00000000180EB070, size 0x0000000000000001, is_write 0x0000000000000000, ip 0x000000001BB1930D",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622374,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19326",1
+boot,,DxeCore.efi,CoreFreeMemoryMapStack,asan-outline-instrumentation,464622386,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19332",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625242,heap-use-after-free,asan,"address 0x00000000180EB0B8, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19E5A",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625299,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19E93",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625342,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19EBE",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625440,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19F20",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625465,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19F39",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625614,heap-use-after-free,asan,"address 0x00000000180EB0D8, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19FCE",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625636,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB19FE4",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625819,heap-use-after-free,asan,"address 0x00000000180EB074, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001BB1A09B",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625845,heap-use-after-free,asan,"address 0x00000000180EB074, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001BB1A0B5",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625949,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A11D",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625966,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB1A12E",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625979,heap-use-after-free,asan,"address 0x00000000180EB0D8, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A13B",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464625999,heap-use-after-free,asan,"address 0x00000000180EB0D8, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB1A14F",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464626027,heap-use-after-free,asan,"address 0x00000000180EB090, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A16B",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464626069,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A195",1
+boot,,DxeCore.efi,CoreConvertPagesEx,asan-outline-instrumentation,464626084,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A1A4",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464627764,heap-use-after-free,asan,"address 0x00000000180EB008, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A834",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464627820,heap-use-after-free,asan,"address 0x00000000180EB000, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A86C",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464627863,heap-use-after-free,asan,"address 0x00000000180EB000, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A897",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464627956,heap-use-after-free,asan,"address 0x00000000180EB01C, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001BB1A8F4",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464627981,heap-use-after-free,asan,"address 0x00000000180EB038, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A90D",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464628006,heap-use-after-free,asan,"address 0x00000000180EB020, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A926",1
+boot,,DxeCore.efi,CoreFindFreePagesI,asan-outline-instrumentation,464628028,heap-use-after-free,asan,"address 0x00000000180EB028, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1A93C",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464631941,heap-use-after-free,asan,"address 0x00000000180EB008, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1B885",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632228,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1B9A4",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632289,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1B9E1",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632371,heap-use-after-free,asan,"address 0x00000000180EB058, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BA33",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632430,heap-use-after-free,asan,"address 0x00000000180EB088, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BA6E",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632482,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BAA2",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632543,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BADF",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632564,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BAF4",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632592,heap-use-after-free,asan,"address 0x00000000180EB080, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BB10",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632613,heap-use-after-free,asan,"address 0x00000000180EB078, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BB25",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632673,heap-use-after-free,asan,"address 0x00000000180EB090, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB1BB61",1
+boot,,DxeCore.efi,CoreGetMemoryMap,asan-outline-instrumentation,464632717,heap-use-after-free,asan,"address 0x00000000180EB074, size 0x0000000000000004, is_write 0x0000000000000000, ip 0x000000001BB1BB8D",1
+boot,,DxeCore.efi,InternalBaseLibIsListValid,asan-outline-instrumentation,464729246,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB3349E",1
+boot,,DxeCore.efi,InternalBaseLibIsListValid,asan-outline-instrumentation,464729303,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB334D7",1
+boot,,DxeCore.efi,InsertTailList,asan-outline-instrumentation,464730365,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB338FD",1
+boot,,DxeCore.efi,InsertTailList,asan-outline-instrumentation,464730386,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33912",1
+boot,,DxeCore.efi,InsertTailList,asan-outline-instrumentation,464730400,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB33920",1
+boot,,DxeCore.efi,InsertTailList,asan-outline-instrumentation,464730417,heap-use-after-free,asan,"address 0x00000000180EBF80, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB33931",1
+boot,,DxeCore.efi,InsertTailList,asan-outline-instrumentation,464730433,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB33941",1
+boot,,DxeCore.efi,IsListEmpty,asan-outline-instrumentation,464730914,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33B22",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731571,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33DB3",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731588,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33DC4",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731609,heap-use-after-free,asan,"address 0x00000000180EB0C0, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB33DD9",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731621,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33DE5",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731632,heap-use-after-free,asan,"address 0x00000000180EB068, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33DF0",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731649,heap-use-after-free,asan,"address 0x00000000180EB0B8, size 0x0000000000000008, is_write 0x0000000000000001, ip 0x000000001BB33E01",1
+boot,,DxeCore.efi,RemoveEntryList,asan-outline-instrumentation,464731660,heap-use-after-free,asan,"address 0x00000000180EB060, size 0x0000000000000008, is_write 0x0000000000000000, ip 0x000000001BB33E0C",1

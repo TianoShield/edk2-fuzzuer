@@ -1,0 +1,61 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Firness
+  FILE_GUID                      = 67385344-f7a6-4760-b691-768dd6868a96
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FirnessMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  FirnessMain.c
+  FirnessHarnesses.c
+  FirnessHelpers.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ShellPkg/ShellPkg.dec
+  NetworkPkg/NetworkPkg.dec
+  OvmfPkg/OvmfPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HobLib
+  MemoryAllocationLib
+  PcdLib
+  PerformanceLib
+  PrintLib
+  RegisterFilterLib
+  StackCheckFailureHookLib
+  StackCheckLib
+  TimeBaseLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiLib
+  UefiRuntimeServicesTableLib
+
+[Guids]
+  gEdkiiMemoryProfileGuid
+  gEdkiiPiSmmCommunicationRegionTableGuid
+  gEfiSmmLockBoxCommunicationGuid
+  gSmiHandlerProfileGuid
+  gVarCheckPolicyLibMmiHandlerGuid
+
+[Protocols]
+  gEfiSmmCommunicationProtocolGuid
+  gEfiSmmFaultTolerantWriteProtocolGuid
+  gEfiSmmVariableProtocolGuid
+
+[Depex]
+  gEfiSmmCommunicationProtocolGuid

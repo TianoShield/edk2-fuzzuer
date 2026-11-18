@@ -1,0 +1,91 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Firness
+  FILE_GUID                      = b51d9a99-bc01-487e-a21a-5188f1a6ea88
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FirnessMain
+
+#
+#  This flag specifies whether HII resource section is generated into PE image.
+#
+  UEFI_HII_RESOURCE_SECTION      = TRUE
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  FirnessMain.c
+  FirnessHarnesses.c
+  FirnessHelpers.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ShellPkg/ShellPkg.dec
+  NetworkPkg/NetworkPkg.dec
+  OvmfPkg/OvmfPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  ExtractGuidedSectionLib
+  HandleParsingLib
+  HiiLib
+  HobLib
+  MemoryAllocationLib
+  NetLib
+  PcdLib
+  PerformanceLib
+  PrintLib
+  RegisterFilterLib
+  ShellCommandLib
+  ShellLib
+  StackCheckFailureHookLib
+  StackCheckLib
+  TimeBaseLib
+  UefiApplicationEntryPoint
+  UefiBootServicesTableLib
+  UefiLib
+  UefiRuntimeServicesTableLib
+
+[Guids]
+  gEfiAuthenticatedVariableGuid
+  gEfiDiskInfoAhciInterfaceGuid
+  gEfiDiskInfoIdeInterfaceGuid
+  gEfiDiskInfoUfsInterfaceGuid
+  gEfiFirmwareFileSystem2Guid
+  gEfiGlobalVariableGuid
+  gEfiHobMemoryAllocBspStoreGuid
+  gEfiHobMemoryAllocModuleGuid
+  gEfiHobMemoryAllocStackGuid
+  gEfiMemoryTypeInformationGuid
+  gEfiMmCommunicateHeaderV3Guid
+  gEfiPcAnsiGuid
+  gEfiPersistentVirtualCdGuid
+  gEfiPersistentVirtualDiskGuid
+  gEfiSasDevicePathGuid
+  gEfiSmbios3TableGuid
+  gEfiSmbiosTableGuid
+  gEfiUartDevicePathGuid
+  gEfiVT100Guid
+  gEfiVT100PlusGuid
+  gEfiVTUTF8Guid
+  gEfiVirtualCdGuid
+  gEfiVirtualDiskGuid
+  gQemuRamfbGuid
+  gUefiOvmfPkgTokenSpaceGuid
+  gVarCheckPolicyLibMmiHandlerGuid
+  gZeroGuid
+
+[Protocols]
+  gEdkiiDeviceIdentifierTypePciGuid
+  gEfiDebugPortProtocolGuid
+  gEfiSmmVariableProtocolGuid
+  gGetPcdInfoProtocolGuid
